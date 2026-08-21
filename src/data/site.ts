@@ -23,7 +23,7 @@ export const sections = [
 export const experience = [
   {
     date: "Oct 2025 — Present",
-    title: "Full-Stack Engineer",
+    title: "Software Developer",
     org: "Cult Creative",
     orgHref: "https://cultcreative.asia",
     summary:

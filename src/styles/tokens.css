@@ -1,27 +1,31 @@
-/* Catppuccin Mocha — https://catppuccin.com/palette
+/* Catppuccin Macchiato — https://catppuccin.com/palette
+   Matching the VS Code theme this site was written in: base #24273a, the
+   bluest of Catppuccin's dark flavours.
+
    Only the subset this site actually uses. Adding a colour here is a
    deliberate act: the palette turns to soup if every pastel gets a job. */
 :root {
-  --base: #1e1e2e;
-  --mantle: #181825;
-  --crust: #11111b;
+  --base: #24273a;
+  --mantle: #1e2030;
+  --crust: #181926;
 
-  --surface0: #313244;
-  --surface1: #45475a;
-  --surface2: #585b70;
+  --surface0: #363a4f;
+  --surface1: #494d64;
+  --surface2: #5b6078;
 
-  /* Text ramp. subtext0 and below fail contrast on small type, so they are
-     borders and dividers only — never body copy. */
-  --text: #cdd6f4;
-  --subtext1: #bac2de;
-  --subtext0: #a6adc8;
-  --overlay0: #6c7086;
+  /* Text ramp, contrast-checked against --base:
+       text 9.9:1 · subtext1 8.2:1 · subtext0 6.6:1 · overlay0 3.2:1
+     overlay0 fails AA for body copy, so it stays on borders and dividers. */
+  --text: #cad3f5;
+  --subtext1: #b8c0e0;
+  --subtext0: #a5adcb;
+  --overlay0: #6e738d;
 
-  --peach: #fab387;
-  --mauve: #cba6f7;
-  --sky: #89dceb;
-  --green: #a6e3a1;
-  --red: #f38ba8;
+  --peach: #f5a97f;
+  --mauve: #c6a0f6;
+  --sky: #91d7e3;
+  --green: #a6da95;
+  --red: #ed8796;
 
   --accent: var(--peach);
   --accent-2: var(--mauve);

@@ -44,9 +44,11 @@ button:focus-visible {
   z-index: 0;
   pointer-events: none;
   transition: opacity 400ms var(--ease-disc);
+  /* Tint derived from the accent token rather than a hardcoded rgba, so the
+     torch can never drift out of sync with the palette. */
   background: radial-gradient(
     500px circle at var(--torch-x, 50%) var(--torch-y, 50%),
-    rgba(203, 166, 247, 0.10),
+    color-mix(in oklab, var(--accent-2) 11%, transparent),
     transparent 68%
   );
 }
