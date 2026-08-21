@@ -1,0 +1,36 @@
+/* Catppuccin Mocha — https://catppuccin.com/palette
+   Only the subset this site actually uses. Adding a colour here is a
+   deliberate act: the palette turns to soup if every pastel gets a job. */
+:root {
+  --base: #1e1e2e;
+  --mantle: #181825;
+  --crust: #11111b;
+
+  --surface0: #313244;
+  --surface1: #45475a;
+  --surface2: #585b70;
+
+  /* Text ramp. subtext0 and below fail contrast on small type, so they are
+     borders and dividers only — never body copy. */
+  --text: #cdd6f4;
+  --subtext1: #bac2de;
+  --subtext0: #a6adc8;
+  --overlay0: #6c7086;
+
+  --peach: #fab387;
+  --mauve: #cba6f7;
+  --sky: #89dceb;
+  --green: #a6e3a1;
+  --red: #f38ba8;
+
+  --accent: var(--peach);
+  --accent-2: var(--mauve);
+
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  --font-sans: ui-sans-serif, -apple-system, "Inter", system-ui, sans-serif;
+
+  /* Disc-flight easing: a throw settles, it does not stop dead. */
+  --ease-disc: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --measure: 62ch;
+}
