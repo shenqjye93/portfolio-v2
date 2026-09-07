@@ -1,43 +1,47 @@
-# Astro Starter Kit: Minimal
+# Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Personal site — Next.js (App Router, static export), Tailwind CSS v4,
+Catppuccin Macchiato.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
 ```text
 /
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+├── app/
+│   ├── globals.css      # tokens + @theme mapping + component classes
+│   ├── layout.tsx       # <html>, metadata, torch mount
+│   └── page.tsx         # the whole page
+├── components/
+│   ├── Card.tsx         # one Experience/Work entry (server)
+│   ├── Icon.tsx         # inline SVG paths (server)
+│   ├── Nav.tsx          # scroll-spy rail nav (client)
+│   └── Torch.tsx        # cursor torchlight (client)
+├── lib/
+│   └── site.ts          # all copy lives here
+└── public/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+All content is in `lib/site.ts` so editing the site never means editing
+layout. Only `Nav` and `Torch` are client components; everything else
+renders on the server.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Styling
 
-Any static assets, like images, can be placed in the `public/` directory.
+`app/globals.css` holds the Catppuccin tokens as plain CSS custom
+properties, then maps them into Tailwind via `@theme inline` — so
+`bg-base`, `text-accent`, and `font-mono` work in JSX while the palette
+keeps exactly one definition.
 
-## 🧞 Commands
+A handful of rules stay hand-written under `@layer components`: the
+torchlight gradient (its centre is a custom property updated per frame),
+the nav tick `::before`, the card hover-dim, and the skip link. Each is
+commented with why Tailwind isn't the right tool there.
 
-All commands are run from the root of the project, from a terminal:
+## Commands
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command         | Action                                  |
+| :-------------- | :-------------------------------------- |
+| `npm install`   | Install dependencies                    |
+| `npm run dev`   | Dev server at `localhost:3000`          |
+| `npm run build` | Static export to `./out/`               |
+| `npm start`     | Serve the production build              |

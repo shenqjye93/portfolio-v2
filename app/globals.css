@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* Catppuccin Macchiato — https://catppuccin.com/palette
+   Matching the VS Code theme this site was written in: base #24273a, the
+   bluest of Catppuccin's dark flavours.
+
+   Only the subset this site actually uses. Adding a colour here is a
+   deliberate act: the palette turns to soup if every pastel gets a job. */
+:root {
+  --base: #24273a;
+  --mantle: #1e2030;
+  --crust: #181926;
+
+  --surface0: #363a4f;
+  --surface1: #494d64;
+  --surface2: #5b6078;
+
+  /* Text ramp, contrast-checked against --base:
+       text 9.9:1 · subtext1 8.2:1 · subtext0 6.6:1 · overlay0 3.2:1
+     overlay0 fails AA for body copy, so it stays on borders and dividers. */
+  --text: #cad3f5;
+  --subtext1: #b8c0e0;
+  --subtext0: #a5adcb;
+  --overlay0: #6e738d;
+
+  --peach: #f5a97f;
+  --mauve: #c6a0f6;
+  --sky: #91d7e3;
+  --green: #a6da95;
+  --red: #ed8796;
+
+  --accent: var(--peach);
+  --accent-2: var(--mauve);
+
+  /* Disc-flight easing: a throw settles, it does not stop dead. */
+  --ease-disc: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --measure: 62ch;
+}
+
+/* Tailwind reads these to generate bg-base, text-accent, font-mono, etc.
+   They point at the tokens above rather than duplicating the hex values,
+   so the palette still has exactly one definition. */
+@theme inline {
+  --color-base: var(--base);
+  --color-mantle: var(--mantle);
+  --color-crust: var(--crust);
+
+  --color-surface0: var(--surface0);
+  --color-surface1: var(--surface1);
+  --color-surface2: var(--surface2);
+
+  --color-text: var(--text);
+  --color-subtext1: var(--subtext1);
+  --color-subtext0: var(--subtext0);
+  --color-overlay0: var(--overlay0);
+
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  --font-sans: ui-sans-serif, -apple-system, "Inter", system-ui, sans-serif;
+
+  --ease-disc: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--base);
+    color: var(--subtext1);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  a { color: var(--text); text-decoration: none; }
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection { background: var(--accent); color: var(--crust); }
+}
+
+@layer components {
+  /* ---- Torchlight ----------------------------------------------------
+     A fixed radial gradient tracking an eased pointer position. Sits above
+     the background but below all content, and never eats pointer events.
+     Stays hand-written CSS: Tailwind has no syntax for a gradient whose
+     centre is driven by a custom property the client updates each frame. */
+  .torch {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 400ms var(--ease-disc);
+    /* Tint derived from the accent token rather than a hardcoded rgba, so the
+       torch can never drift out of sync with the palette. */
+    background: radial-gradient(
+      500px circle at var(--torch-x, 50%) var(--torch-y, 50%),
+      color-mix(in oklab, var(--accent-2) 11%, transparent),
+      transparent 68%
+    );
+  }
+  /* Touch devices have no hover pointer, so the torch is dead weight there. */
+  @media (hover: none), (prefers-reduced-motion: reduce) {
+    .torch { display: none; }
+  }
+
+  /* Rail nav ticks: the ::before rule that grows on hover has no Tailwind
+     equivalent worth the arbitrary-value noise. */
+  .nav-link::before {
+    content: "";
+    height: 1px;
+    width: 2rem;
+    background: var(--surface1);
+    transition: width 260ms var(--ease-disc), background-color 260ms var(--ease-disc);
+  }
+  .nav-link:hover::before,
+  .nav-link[aria-current="true"]::before {
+    width: 4rem;
+    background: var(--accent);
+  }
+
+  /* Dim siblings on hover so the pointer directs attention. Scoped to fine
+     pointers: on touch there is no hover, and :has would misfire. */
+  @media (hover: hover) {
+    .cards:hover .card:not(:hover) { opacity: 0.5; }
+  }
+
+  /* Card bullets keep their markers — these are the accomplishment lines,
+     and running them together would cost the scannability they exist for. */
+  .card-bullets { margin: 0.5rem 0 0; padding-left: 1.05rem; list-style: disc; }
+  .card-bullets li { margin-bottom: 0.4rem; }
+  .card-bullets li::marker { color: var(--surface2); }
+
+  .prose-block { max-width: var(--measure); }
+  .prose-block > p + p { margin-top: 1rem; }
+  .prose-block strong { color: var(--text); font-weight: 600; }
+
+  .inline-link {
+    color: var(--text);
+    border-bottom: 1px solid var(--surface2);
+    transition: color 200ms var(--ease-disc), border-color 200ms var(--ease-disc);
+  }
+  .inline-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* Off-screen until focused — the classic skip link, which Tailwind's
+     sr-only cannot express because it must become visible on :focus. */
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus {
+    left: 1rem; top: 1rem;
+    position: fixed; z-index: 10;
+    padding: 0.6rem 1rem;
+    background: var(--surface0);
+    color: var(--text);
+    border-radius: 6px;
+  }
+}

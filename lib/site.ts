@@ -1,15 +1,15 @@
 // All copy lives here so editing the site never means editing layout.
 
 export const profile = {
-  name: "Sam Ng",
+  name: "Samuel Ng",
   role: "Full-Stack Engineer",
   tagline:
-    "I build platforms end to end — transactional backends, admin dashboards, and the mobile apps that talk to them.",
-  email: "sam@cultcreative.asia",
+    "I build platforms end to end.",
+  email: "shenqjye93@gmail.com",
   socials: [
     { label: "GitHub", href: "https://github.com/shenqjye93", icon: "github" },
-    { label: "LinkedIn", href: "#", icon: "linkedin" },
-    { label: "Email", href: "mailto:sam@cultcreative.asia", icon: "mail" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/samnsj/", icon: "linkedin" },
+    { label: "Email", href: "mailto:shenqjye93@gmail.com", icon: "mail" },
   ],
 } as const;
 
@@ -17,7 +17,6 @@ export const sections = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "work", label: "Work" },
-  { id: "spirit", label: "Spirit of the Game" },
 ] as const;
 
 export const experience = [
