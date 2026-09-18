@@ -1,11 +1,11 @@
-import { profile, experience, work } from "@/lib/site";
+import { profile, experience, projects } from "@/lib/site";
 import Card from "@/components/Card";
 import Icon from "@/components/Icon";
 import Nav from "@/components/Nav";
 
 export default function Home() {
   return (
-    <div className="relative z-[1] mx-auto max-w-[1280px] px-6 lg:grid lg:grid-cols-[minmax(0,44%)_minmax(0,56%)] lg:gap-14 lg:px-12">
+    <div className="relative z-[1] mx-auto max-w-[1280px] px-6 lg:grid lg:grid-cols-[minmax(0,40%)_minmax(0,56%)] lg:gap-14 lg:px-12">
       <header className="pb-8 pt-16 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-between lg:py-22">
         <div>
           <h1 className="text-[clamp(2.4rem,6vw,3rem)] font-bold leading-[1.1] tracking-[-0.02em] text-text">
@@ -44,25 +44,20 @@ export default function Home() {
           </h2>
           <div className="prose-block">
             <p>
-              I&apos;m an engineer who likes the parts of a system where correctness is
-              not obvious — the write that has to survive being retried, the token
-              that has to survive being stolen, the counter two requests reach at
-              the same moment.
+              I&apos;m an engineer who loves to explore and experiment. 
             </p>
             <p>
-              Most of my work has been at{" "}
+              Currently, I'm a Software Developer at{" "}
               <a
-                className="inline-link"
+                className="inline-link font-bold !no-underline"
                 href="https://cultcreative.asia"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Cult Creative
               </a>
-              , a creator platform where I&apos;ve shipped across the backend, the admin
-              dashboard, and the mobile app. Working on all three teaches you
-              something narrow specialisation doesn&apos;t: how a decision in the schema
-              shows up two clients later.
+              , a creator platform where I&apos;ve contributed in building our mobile app and several other key features. 
+              I work closely with product manager, designers and developers to constantly improve our platform.
             </p>
             <p>
               Away from the keyboard I play ultimate frisbee — a sport with no
@@ -77,25 +72,25 @@ export default function Home() {
           <h2 className="sticky top-0 z-[2] -mx-6 mb-7 bg-base/90 px-6 py-4 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-text backdrop-blur-lg lg:hidden">
             Experience
           </h2>
-          <ol className="cards flex list-none flex-col gap-3 p-0" role="list">
+          <ol className="cards flex list-none flex-col gap-8 p-0" role="list">
             {experience.map((e) => (
               <Card key={e.title} {...e} />
             ))}
           </ol>
         </section>
 
-        <section id="work" className="mb-8 scroll-mt-12" aria-label="Selected work">
+        <section id="projects" className="mb-16 scroll-mt-12" aria-label="Projects">
           <h2 className="sticky top-0 z-[2] -mx-6 mb-7 bg-base/90 px-6 py-4 font-mono text-[0.72rem] uppercase tracking-[0.16em] text-text backdrop-blur-lg lg:hidden">
-            Work
+            Projects
           </h2>
-          <ol className="cards flex list-none flex-col gap-3 p-0" role="list">
-            {work.map((w) => (
-              <Card key={w.title} {...w} />
+          <ol className="cards flex list-none flex-col gap-8 p-0" role="list">
+            {projects.map((p) => (
+              <Card key={p.title} {...p} />
             ))}
           </ol>
         </section>
 
-        <footer className="max-w-[var(--measure)] text-sm text-overlay0">
+        <footer className="max-w-[var(--measure)] mt-10 text-sm text-overlay0">
           <p>
             Built with{" "}
             <a

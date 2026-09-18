@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-const EASE = 0.12; 
-const SETTLE_PX = 0.35; 
+const EASE = 0.12;
+const SETTLE_PX = 0.35;
 
 export default function Torch() {
 	const ref = useRef<HTMLDivElement>(null);
@@ -35,7 +35,7 @@ export default function Torch() {
 				x = targetX;
 				y = targetY;
 				draw();
-				frame = 0; // settled: stop burning frames until next move
+				frame = 0;
 				return;
 			}
 
@@ -56,7 +56,6 @@ export default function Torch() {
 			wake();
 		};
 
-		// Fade rather than freeze when the pointer leaves the window.
 		const onLeave = () => {
 			el.style.opacity = "0";
 		};
@@ -76,6 +75,5 @@ export default function Torch() {
 			if (frame) cancelAnimationFrame(frame);
 		};
 	}, []);
-
 	return <div ref={ref} className="torch" aria-hidden="true" />;
 }

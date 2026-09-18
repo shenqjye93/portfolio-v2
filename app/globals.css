@@ -143,6 +143,21 @@
     .cards:hover .card:not(:hover) { opacity: 0.5; }
   }
 
+  .card-inner { position: relative; }
+  .card-link { color: inherit; }
+  .card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    z-index: 1;
+  }
+  .card-inner .inline-link,
+  .card-inner .card-sublink {
+    position: relative;
+    z-index: 2;
+  }
+
   /* Card bullets keep their markers — these are the accomplishment lines,
      and running them together would cost the scannability they exist for. */
   .card-bullets { margin: 0.5rem 0 0; padding-left: 1.05rem; list-style: disc; }
@@ -155,7 +170,6 @@
 
   .inline-link {
     color: var(--text);
-    border-bottom: 1px solid var(--surface2);
     transition: color 200ms var(--ease-disc), border-color 200ms var(--ease-disc);
   }
   .inline-link:hover { color: var(--accent); border-color: var(--accent); }
